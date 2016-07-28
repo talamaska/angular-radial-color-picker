@@ -1,0 +1,11 @@
+{
+  "name": "angular-radial-color-picker",
+  "homepage": "https://github.com/talamaska/angular-radial-color-picker",
+  "authors": [
+    "zlati.pehlivanov@gmail.com"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "private": true
+}
