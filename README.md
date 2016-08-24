@@ -7,7 +7,7 @@ The color picker has been developed treating the mobile devices as first class c
 * Responsive size
 * Blazing fast GPU accelerated animations
 
-The only dependency of Angular Radial Color Picker is **(Propeller)[https://github.com/PixelsCommander/Propeller]** for rotating the knob.
+The only dependency of Angular Radial Color Picker is [Propeller](https://github.com/PixelsCommander/Propeller) for rotating the knob.
 
 ## Quick Links:
 
@@ -29,7 +29,7 @@ npm install angular-material-color-picker
 ```
 
 ### Bower
-- Download (Propeller)[https://github.com/PixelsCommander/Propeller]
+- Download [Propeller](https://github.com/PixelsCommander/Propeller)
 - Download the color picker as usual
 ```bash
 bower install angular-material-color-picker
@@ -75,7 +75,7 @@ angular.module('myApp', ['color.picker.core']);
 | green | number | 0       | An integer between 0 and 255 |
 | blue  | number | 0       | An integer between 0 and 255 |
 
-- `on-select` callback which gets triggered when a color is selected (optional, see [Events](#events)). The passed function is invoked with one argument which is an object with the following properties:
+- `on-select` callback which gets triggered when a color is selected (optional, see [Events](#user-content-events)). The passed function is invoked with one argument which is an object with the following properties:
 
 | Name  | Type   | Description                  |
 |-------|--------|------------------------------|
