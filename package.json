@@ -1,19 +1,44 @@
 {
   "name": "angular-radial-color-picker",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Angular-ready radial color picker with some sleek animations.",
+  "main": "dist/js/color-picker.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "rimraf dist && mkdirp dist/js && mkdirp dist/css",
+    "images": "mkdirp dist/images && copyup src/images/*.png dist",
+    "annotate": "mkdirp dist/js && ng-annotate -a src/color-picker.bundle.js > dist/js/color-picker.js",
+    "scss:src": "node-sass -q --output-style expanded src/scss/color-picker.scss dist/css/color-picker.css",
+    "scss:dist": "node-sass --source-map true --source-map-contents -q --output-style compressed src/scss/color-picker.scss dist/css/color-picker.min.css",
+    "scss": "mkdirp dist/css && npm run scss:src && npm run scss:dist",
+    "minify": "npm run annotate && uglifyjs dist/js/color-picker.js -o dist/js/color-picker.min.js --source-map dist/js/color-picker.min.js.map --source-map-root / --source-map-url color-picker.min.js.map --source-map-include-sources -c -m",
+    "build": "npm run clean && npm run minify && npm run scss && npm run images",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/talamaska/angular-radial-color-picker.git"
   },
-  "author": "",
+  "author": "Zlati Pehlivanov <Zlati.Pehlivanov@mentormate.com>",
+  "contributors": [
+    "Rosen Kanev <rkunev@gmail.com>"
+  ],
+  "keywords": ["angular", "material", "color", "color picker"],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/talamaska/angular-radial-color-picker/issues"
   },
-  "homepage": "https://github.com/talamaska/angular-radial-color-picker#readme"
+  "homepage": "https://github.com/talamaska/angular-radial-color-picker#readme",
+  "dependencies": {
+    "angular": "^1.5.8",
+    "Propeller": "^0.3.1"
+  },
+  "devDependencies": {
+    "copyfiles": "^1.0.0",
+    "mkdirp": "^0.5.1",
+    "ng-annotate": "^1.2.1",
+    "node-sass": "^3.8.0",
+    "rimraf": "^2.5.4",
+    "uglify-js": "^2.7.3"
+  }
 }
