@@ -10,3 +10,9 @@ plugins/
 # Sublime Text
 *.sublime-workspace
 *.sublime-project
+
+.jscsrc
+.jshintrc
+.sass-lint.yml
+.editorconfig
+.bowerrc
