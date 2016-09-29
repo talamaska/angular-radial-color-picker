@@ -1,0 +1,359 @@
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Roboto Slab', serif;
+}
+.main-header .md-toolbar-tools {
+    background: rgba(20, 20, 20, .3);
+}
+.main-header .md-toolbar-tools a:last-child {
+    margin-left: 15px;
+}
+
+.wrapper {
+    margin-top: 10px;
+}
+
+.overlapping-main-content {
+    background-color: transparent;
+    z-index: 2;
+    position: relative;
+}
+
+.main-content-sheet {
+    background: rgb(250, 250, 250);
+    margin: 5px;
+    padding: 0 16px;
+    overflow: hidden;
+}
+.layout-row > .text-container,
+.layout-row > .gist {
+    max-width: 720px;
+}
+.gist-wrapper {
+    margin-left: -16px;
+    margin-right: -16px;
+    background: #ebebeb;
+}
+
+.token.attr-name,.token.builtin,.token.selector,.token.string {
+    color: #E91E63
+}
+
+.token.boolean,.token.constant,.token.number,.token.property,.token.symbol,.token.tag {
+    color: #9D1DB3
+}
+
+.token.atrule,.token.attr-value,.token.keyword {
+    color: #00BCD4
+}
+
+code {
+    display: inline-block;
+    background-color: rgba(0,0,0,.06);
+    border-radius: 3px;
+    white-space: pre-wrap;
+    padding: 6px 2px;
+}
+
+.gist {
+    width: 100%;
+}
+.gist code {
+    font-size: 85%
+}
+
+.gist code,.gist pre {
+    display: inline-block;
+    background-color: rgba(0,0,0,.06);
+    border-radius: 3px;
+}
+
+.gist pre {
+    font-size: 87%;
+    width: 100%;
+    margin: 0;
+    background: none;
+    padding-left: 3.2em;
+    box-sizing: border-box
+}
+div.prism-show-language > div.prism-show-language-label {
+    font-family: Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;
+    background-color: rgba(0,0,0,.15);
+    color: rgba(0,0,0,.5);
+    font-size: 13px;
+    padding: 3px 10px;
+    border-radius: 0;
+    letter-spacing: 1px;
+}
+.line-numbers .line-numbers-rows {
+    border-color: #ccc;
+}
+.line-numbers-rows > span:before {
+    color: #aaa;
+}
+.gist code:before,.gist code:after {
+    letter-spacing: -.2em;
+    content: "\00a0"
+}
+
+.gist pre>code:before,.gist pre>code:after {
+    letter-spacing: 0;
+    content: ""
+}
+
+.gist pre>code {
+    background-color: rgba(0,0,0,0);
+    padding: 0;
+    font-size: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    word-break: break-word
+}
+
+.gist pre[class*=language-]>code[data-language] {
+    overflow: hidden
+}
+
+pre[class*=language-]>code[data-language]::before {
+    content: "";
+    background: 0 0
+}
+
+.token.cr:before,.token.lf:before {
+    display: none
+}
+
+.language-css .token.string,.style .token.string,.token.entity,.token.operator,.token.url,.token.variable {
+    color: #9D1DB3;
+    background: 0 0
+}
+
+code[class*=language-],pre[class*=language-] {
+    color: rgba(0,0,0,.87);
+    text-shadow: none
+}
+
+.token.function {
+    color: #009688
+}
+
+.main-fab {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+
+    /* Preload the color wheel image, because the md-dialog will create the html template on-the-fly */
+    background: url('/vendor/angular-radial-color-picker/dist/images/wheel.png') no-repeat -9999px -9999px;
+}
+.main-fab.md-fab {
+    /* whiteframe 5dp */
+    box-shadow: 0 3px 5px -1px rgba(0, 0, 0, .2),
+                0 5px 8px 0 rgba(0, 0, 0, .14),
+                0 1px 14px 0 rgba(0, 0, 0, .12);
+}
+
+.content-sheet-actions {
+    float: right;
+}
+.color-picker-dialog md-dialog-content {
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+.color-picker-dialog md-dialog-content:not([layout=row]) > .dialog-content-wrapper:first-child:not(.md-subheader) {
+    margin: auto;
+    width: 100%;
+}
+.color-picker-dialog color-picker,
+.color-picker-dialog md-dialog-content .hint {
+    margin: auto;
+}
+.color-picker-dialog color-picker {
+    width: 280px;
+    height: 280px;
+    box-sizing: border-box;
+}
+.color-picker-dialog md-dialog-content .hint {
+    width: 90vw;
+    margin-top: 15px;
+    text-align: center;
+}
+
+@media screen and (min-width: 960px) {
+    .wrapper {
+        margin-top: -80px;
+    }
+
+    .main-header {
+        height: 200px;
+    }
+
+    .main-content-sheet {
+        margin: 0 0 25px 0;
+    }
+
+    .main-fab {
+        position: absolute;
+        top: 200px;
+        bottom: auto;
+        right: 10%;
+        margin: -28px -28px 0 0;
+    }
+
+    .color-picker-dialog color-picker {
+        width: 350px;
+        height: 350px;
+        padding-bottom: 0;
+    }
+
+    .color-picker-dialog md-dialog-content .hint {
+        max-width: 370px;
+        width: 100%;
+        text-align: left;
+    }
+
+    md-dialog.md-dialog-fullscreen {
+        min-height: 0;
+        min-width: auto;
+        border-radius: 4px;
+    }
+
+    color-picker .color-palette {
+        /* color wheel animation */
+        -webkit-transition-duration: .35s;
+                transition-duration: .35s;
+    }
+    color-picker .color.click-color {
+        /* selector (middle button) pulse animation */
+        -webkit-animation-duration: .28s;
+                animation-duration: .28s;
+
+        /* selector (middle button) appear/disappear */
+        -webkit-transition-duration: .49s;
+                transition-duration: .49s;
+    }
+    color-picker .color-shadow-animate {
+        /* ripple animation */
+        -webkit-animation-duration: .35s;
+                animation-duration: .35s;
+    }
+    color-picker .knob {
+        /* first property is for knob shadow on drag */
+        /* second property is for knob transform on appear/disappear */
+        -webkit-transition-duration: .2s, .28s;
+                transition-duration: .2s, .28s;
+    }
+}
+
+
+
+@media screen and (max-width: 960px) {
+    .main-header {
+        position: fixed;
+        top: 0;
+    }
+    .wrapper {
+        margin-top: 56px;
+    }
+    .overlapping-main-content {
+        position: static;
+    }
+}
+@media (max-width: 959px) and (min-width: 0) and (orientation: landscape) {
+    .main-header {
+        min-height: 56px; /* normalize toolbar height */
+    }
+    .main-header .md-toolbar-tools {
+        height: 56px;
+        min-height: 56px;
+    }
+}
+@media screen and (max-width: 420px) {
+    .main-header .md-toolbar-tools h2 {
+        font-size: 17px;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .main-header .md-toolbar-tools h2 {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .main-header .md-toolbar-tools h2 {
+        font-size: 13px;
+    }
+}
+
+/* Remove box-shadows, because of rendering issues on mobile */
+@media screen and (max-width: 960px) {
+    md-dialog {
+        box-shadow: none;
+    }
+}
+.main-fab.pulsate {
+    -webkit-animation: hue 60s infinite linear, pulse 5s cubic-bezier(0.35, 0, 0.25, 1) 2s infinite forwards;
+            animation: hue 60s infinite linear, pulse 5s cubic-bezier(0.35, 0, 0.25, 1) 2s infinite forwards;
+    will-change: filter, transform;
+}
+
+@-webkit-keyframes pulse {
+    0% {
+        -webkit-transform: scale(1);
+                transform: scale(1);
+    }
+    4% {
+        -webkit-transform: scale(1.2);
+                transform: scale(1.2);
+    }
+    11% {
+        -webkit-transform: scale(1);
+                transform: scale(1);
+    }
+    100% {
+        -webkit-transform: scale(1);
+                transform: scale(1);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        -webkit-transform: scale(1);
+                transform: scale(1);
+    }
+    4% {
+        -webkit-transform: scale(1.2);
+                transform: scale(1.2);
+    }
+    11% {
+        -webkit-transform: scale(1);
+                transform: scale(1);
+    }
+    100% {
+        -webkit-transform: scale(1);
+                transform: scale(1);
+    }
+}
+@-webkit-keyframes hue {
+    0% {
+        -webkit-filter: hue-rotate(0deg);
+        filter: hue-rotate(0deg);
+    }
+    100% {
+        -webkit-filter: hue-rotate(-360deg);
+        filter: hue-rotate(-360deg);
+    }
+}
+@keyframes hue {
+    0% {
+        -webkit-filter: hue-rotate(0deg);
+        filter: hue-rotate(0deg);
+    }
+    100% {
+        -webkit-filter: hue-rotate(-360deg);
+        filter: hue-rotate(-360deg);
+    }
+}

@@ -1,0 +1,123 @@
+<md-toolbar class="main-header md-primary md-whiteframe-1dp" style="background-color: {{ $ctrl.selectedColor }}">
+    <div class="md-toolbar-tools">
+        <h2>Angular Radial Color Picker Demo</h2>
+        <span flex></span>
+        <a class="md-body-1" href="#">
+            <span hide-xs>NPM</span>
+            <md-icon>file_download</md-icon>
+        </a>
+        <a class="md-body-1" href="https://github.com/talamaska/angular-radial-color-picker" target="_blank">
+            <span hide-xs>GitHub</span>
+            <md-icon>code</md-icon>
+        </a>
+    </div>
+</md-toolbar>
+
+<div class="wrapper">
+    <md-button class="main-fab md-fab" ng-class="{ 'pulsate': $ctrl.isNotOpened }" aria-label="Select Color" ng-click="$ctrl.showPicker($event)">
+        <md-icon aria-label="Color picker">colorize</md-icon>
+    </md-button>
+
+    <div class="overlapping-main-content" layout="row" layout-align="center center">
+        <div class="main-content-sheet md-whiteframe-3dp" flex-xs="100" flex-sm="100" flex-gt-sm="60">
+            <div layout="row" layout-align="center">
+                <div class="text-container" flex-gt-md="60" flex-xs="100" flex-sm="100">
+                    <h2 class="md-headline">Overview</h2>
+                    <p>
+                        Angular Radial Color Picker has been developed treating the mobile devices as first class citizens. This means
+                        that out of the box you get:
+                    </p>
+                    <ul>
+                        <li>Touch devices support</li>
+                        <li>Responsive size</li>
+                        <li>Blazing fast GPU accelerated animations</li>
+                        <li>Super small size (~6 kB minified + gzipped)</li>
+                    </ul>
+                    <p>
+                        The size is the overall module size <strong>including</strong> the Propeller dependency. For maximum browser support
+                        the color wheel is actualy a PNG file (59 kB), but we're looking into a pre-generated SVG asset or
+                        a CSS solution such as <code>linear-gradient()</code>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div layout="row" layout-align="center center">
+        <div class="main-content-sheet md-whiteframe-3dp" flex-xs="100" flex-sm="100" flex-gt-sm="60">
+            <div layout="row" layout-align="center">
+                <div class="text-container" flex-gt-md="60" flex-xs="100" flex-sm="100">
+                    <h2 class="md-headline">Sizing</h2>
+                    <p>
+                        Our color picker is in the <code>&lt;md-dialog&gt;</code> component.
+                        On select the color picker closes itself and closes the dialog.
+                    </p>
+                    <p>
+                        As you might have noticed the color picker changes it's size when there is enough space.
+                        There is no voodoo magic - just plain old media queries.
+                    </p>
+                </div>
+            </div>
+            <div layout="row" layout-align="center" class="gist-wrapper">
+                <div class="gist" flex-gt-md="60" flex-xs="100" flex-sm="100">
+<pre class="line-numbers"><code class="language-css">color-picker {
+    width: 230px;
+    height: 230px;
+}
+@media screen and (min-width: 840px) {
+    color-picker {
+        width: 350px;
+        height: 350px;
+    }
+}</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div layout="row" layout-align="center center">
+        <div class="main-content-sheet md-whiteframe-3dp" flex-xs="100" flex-sm="100" flex-gt-sm="60">
+            <div layout="row" layout-align="center">
+                <div class="text-container" flex-gt-md="60" flex-xs="100" flex-sm="100">
+                    <h2 class="md-headline">Animations</h2>
+                    <p>
+                        According to Google's material design guidelines desktop animations should be faster
+                        than those on mobile. The <code>&lt;color-picker&gt;</code> was written with extensibility in mind.
+                    </p>
+
+                    <p>
+                        You can tweek the animations' duration with simple css. The example below shows the animations sped up by 30%.
+                        Wrap the rules in a <code>@media screen and (min-width: 960px) {}</code> and you got yourself nice and quick transitions on
+                        larger screens and slower and smooth transitions on smaller screens.
+                    </p>
+
+                    <p>You can even go further and change the animation timing functions. Sky's the limit!</p>
+                </div>
+            </div>
+            <div layout="row" layout-align="center" class="gist-wrapper">
+                <div class="gist" flex-gt-md="60" flex-xs="100" flex-sm="100">
+<pre class="line-numbers"><code class="language-css">color-picker .color-palette {
+    /* color wheel animation */
+    transition-duration: .35s;
+}
+color-picker .color {
+    /* selector (middle button) pulse animation */
+    animation-duration: .28s;
+
+    /* selector (middle button) appear/disappear */
+    transition-duration: .49s;
+}
+color-picker .color-shadow-animate {
+    /* ripple animation */
+    animation-duration: .35s;
+}
+color-picker .knob {
+    /* first property is for knob shadow on drag */
+    /* second property is for knob appear/disappear */
+    transition-duration: .2s, .28s;
+}</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
