@@ -159,7 +159,7 @@
         }
 
         function $onChanges() {
-            if (this.color) {
+            if (this.color && 'red' in this.color && 'green' in this.color && 'blue' in this.color) {
                 this.angle = ColorPickerService.rgbToHsl(this.color.red, this.color.green, this.color.blue).hue;
             }
         }
