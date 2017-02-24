@@ -19,11 +19,14 @@ The only dependency of Angular Radial Color Picker is [Propeller](https://github
 * [Contribute](#user-content-contributing)
 
 ## <a name="demos">Demos</a>
-TBD
+Color Picker in a modal window - [GitHub Pages](https://talamaska.github.io/angular-radial-color-picker)
+
+Barebones example - [Codepen](http://codepen.io/rkunev/pen/evYaBO)
 
 ## <a name="install">Install</a>
 
 ### NPM
+Color Picker on [npm](https://www.npmjs.com/package/angular-radial-color-picker)
 ```bash
 npm install angular-material-color-picker
 ```
