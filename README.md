@@ -28,14 +28,7 @@ Barebones example - [Codepen](http://codepen.io/rkunev/pen/evYaBO)
 ### NPM
 Color Picker on [npm](https://www.npmjs.com/package/angular-radial-color-picker)
 ```bash
-npm install angular-material-color-picker
-```
-
-### Bower
-- Download [Propeller](https://github.com/PixelsCommander/Propeller)
-- Download the color picker as usual
-```bash
-bower install angular-material-color-picker
+npm install angular-radial-color-picker
 ```
 
 [Back To Top](#user-content-quick-links)
