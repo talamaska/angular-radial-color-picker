@@ -31,8 +31,6 @@ Color Picker on [npm](https://www.npmjs.com/package/angular-radial-color-picker)
 npm install angular-radial-color-picker
 ```
 
-[Back To Top](#user-content-quick-links)
-
 And in your html:
 
 ```html
