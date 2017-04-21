@@ -156,11 +156,16 @@
             knob.addEventListener('transitionend', _onKnobTransitionEnd);
             ripple.addEventListener('animationend', _onRippleAnimationEnd);
             palette.addEventListener('transitionend', _onPaletteTransitionEnd);
+
+            // @fix angular < 1.5.4 doesn't trigger $onChanges properly on init
+            $onChanges.call(this);
         }
 
         function $onChanges() {
             if (this.color && 'red' in this.color && 'green' in this.color && 'blue' in this.color) {
                 this.angle = ColorPickerService.rgbToHsl(this.color.red, this.color.green, this.color.blue).hue;
+            } else {
+                this.angle = 0;
             }
         }
 
