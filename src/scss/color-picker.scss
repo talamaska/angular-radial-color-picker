@@ -93,6 +93,10 @@ color-picker {
         top: -10%;
         left: -10%;
         z-index: 9;
+
+        &.dragging {
+            z-index: 11;
+        }
     }
 
     .color {
