@@ -1,6 +1,6 @@
 {
   "name": "angular-radial-color-picker",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "description": "Angular-ready radial color picker with some sleek animations.",
   "main": "dist/js/color-picker.js",
   "scripts": {
