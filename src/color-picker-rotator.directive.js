@@ -1,3 +1,5 @@
+import Propeller from './propeller.js';
+
 export default function colorPickerRotator() {
     var directive = {
         link: ColorPickerRotatorLink,
