@@ -26,7 +26,12 @@
   "contributors": [
     "Rosen Kanev <rkunev@gmail.com>"
   ],
-  "keywords": ["angular", "material", "color", "color picker"],
+  "keywords": [
+    "angular",
+    "material",
+    "color",
+    "color picker"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/talamaska/angular-radial-color-picker/issues"
