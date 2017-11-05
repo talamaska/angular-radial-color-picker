@@ -3,11 +3,19 @@ export default {
         onSelect: '&',
         color: '<',
         onColorChange: '&'
+        mouseScroll: '<',
+        scrollSensitivity: '<'
     },
     controller: ColorPickerController,
     template: '\
         <div class="color-palette"></div> \
-        <div class="rotator" color-picker-rotator on-rotate="$ctrl.onRotatorDrag(angle)" angle="$ctrl.angle">\
+        <div class="rotator" \
+             color-picker-rotator \
+             disabled="$ctrl.disabled" \
+             mouse-scroll="$ctrl.mouseScroll" \
+             scroll-sensitivity="$ctrl.scrollSensitivity" \
+             on-rotate="$ctrl.onRotatorDrag(angle)" \
+             angle="$ctrl.angle">\
             <div class="knob"></div>\
         </div> \
         <div class="color-shadow"></div> \
