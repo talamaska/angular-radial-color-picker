@@ -38,25 +38,8 @@ function ColorPickerController($element, $rootScope, ColorPickerService) {
 
     var wrapper, knob, colorSel, ripple, palette;
 
-    ColorPickerService.subscribe('open', function() {
-        if (vm.disabled) {
-            ColorPickerService.publish('show', vm.colorModel);
-
-            // showing palette will also show the knob
-            palette.classList.add('blur-palette-in');
-            palette.classList.remove('blur-palette-out');
-        }
-    });
-
-    ColorPickerService.subscribe('close', function() {
-        if (!vm.disabled) {
-            ColorPickerService.publish('hide', vm.colorModel);
-
-            // hiding knob will also hide the palette
-            knob.classList.add('zoom-knob-out');
-            knob.classList.remove('zoom-knob-in');
-        }
-    });
+    ColorPickerService.subscribe('open', openColorPicker);
+    ColorPickerService.subscribe('close', closeColorPicker);
 
     function onColorSelClick() {
         colorSel.classList.add('click-color');
@@ -129,6 +112,26 @@ function ColorPickerController($element, $rootScope, ColorPickerService) {
         palette  = null;
 
         ColorPickerService.unsubscribe();
+    }
+
+    function openColorPicker() {
+        if (vm.disabled) {
+            ColorPickerService.publish('show', vm.colorModel);
+
+            // showing palette will also show the knob
+            palette.classList.add('blur-palette-in');
+            palette.classList.remove('blur-palette-out');
+        }
+    }
+
+    function closeColorPicker() {
+        if (!vm.disabled) {
+            ColorPickerService.publish('hide', vm.colorModel);
+
+            // hiding knob will also hide the palette
+            knob.classList.add('zoom-knob-out');
+            knob.classList.remove('zoom-knob-in');
+        }
     }
 
     function _togglePalleteOnEnter(ev) {
