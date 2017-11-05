@@ -5,6 +5,7 @@ node_modules/
 bower_components/
 platforms/
 plugins/
+dist/
 .sass-cache/
 
 # Sublime Text
