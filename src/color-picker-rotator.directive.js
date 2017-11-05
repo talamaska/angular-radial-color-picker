@@ -1,17 +1,3 @@
-/**
- * @ngdoc directive
- * @name colorPickerRotator
- * @module color.picker.core
- * @restrict A
- *
- * @param {expression} [onRotate] Usually a function to invoke when angle changes
- * @param {number}     [angle]    Angle to change the rotator at. A number between 0 and 360
- *
- * @description
- * Provides rotation capabilities to any element. Also supports touch devices.
- *
- * @example <div color-picker-rotator on-rotate="$ctrl.onRotate(angle)" angle="$ctrl.angle"></div>
- */
 export default function colorPickerRotator() {
     var directive = {
         link: ColorPickerRotatorLink,

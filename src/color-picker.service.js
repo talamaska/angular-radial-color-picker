@@ -1,17 +1,3 @@
-/**
- * @ngdoc service
- * @namespace Utilities
- * @name ColorPickerService
- * @module color.picker.core
- * @requires $rootScope
- *
- * @description
- * API for intercomponent comunication and color model conversions.
- *
- * @example
- * // Convert RGB color model to hexadecimal string
- * ColorPickerService.rgbToHex(255, 0, 0); // returns 'FF0000'
- */
 ColorPickerService.$inject = ['$rootScope'];
 export default function ColorPickerService($rootScope) {
     this.publish = publish;
