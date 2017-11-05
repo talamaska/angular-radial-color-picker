@@ -10,7 +10,11 @@ export default [
             format: 'umd',
             file: 'dist/color-picker.umd.min.js'
         },
-        plugins: [minify()]
+        plugins: [
+            minify({
+                comments: false
+            })
+        ]
     },
     {
         input: 'src/main.js',
