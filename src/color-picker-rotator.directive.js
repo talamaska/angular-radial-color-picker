@@ -34,11 +34,14 @@ export default function colorPickerRotator(ColorPickerService) {
                 }
             },
             onDragStop: function() {
-                $element.removeClass('dragging');
+                if (!$scope.disabled) {
+                    $element.removeClass('dragging');
+                }
             }
         });
 
         colorPicker.addEventListener('keydown', onKeydown);
+        colorPicker.addEventListener('dblclick', onDblClick, { passive: true });
 
         if ($scope.mouseScroll) {
             colorPicker.addEventListener('wheel', onScroll);
@@ -55,6 +58,8 @@ export default function colorPickerRotator(ColorPickerService) {
             propelInstance.unbind();
             propelInstance = null;
 
+            colorPicker.removeEventListener('keydown', onKeydown);
+            colorPicker.removeEventListener('dblclick', onDblClick);
             colorPicker.removeEventListener('wheel', onScroll);
 
             colorPicker = null;
@@ -90,6 +95,18 @@ export default function colorPickerRotator(ColorPickerService) {
                 ev.preventDefault();
                 propelInstance.angle += scrollSensitivity * multiplier;
             }
+        }
+
+        function onDblClick(ev) {
+            if ($scope.disabled || !ev.target.classList.contains('rotator'))
+                return;
+
+            var newAngle = propelInstance.getAngleToMouse({
+                x: ev.clientX,
+                y: ev.clientY,
+            });
+
+            propelInstance.angle = newAngle * Propeller.radToDegMulti;
         }
 
         function onScroll(ev) {

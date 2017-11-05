@@ -118,7 +118,7 @@ function ColorPickerController($element, $rootScope, ColorPickerService) {
     }
 
     function $onDestroy() {
-        wrapper.removeEventListener('keypress', _togglePalleteOnEnter);
+        wrapper.removeEventListener('keyup', _togglePalleteOnEnter);
         colorSel.removeEventListener('animationend', _onColorSelAnimationEnd);
         knob.removeEventListener('transitionend', _onKnobTransitionEnd);
         ripple.removeEventListener('animationend', _onRippleAnimationEnd);
