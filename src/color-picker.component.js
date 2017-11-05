@@ -41,31 +41,6 @@ function ColorPickerController($element, $rootScope, ColorPickerService) {
     ColorPickerService.subscribe('open', openColorPicker);
     ColorPickerService.subscribe('close', closeColorPicker);
 
-    function onColorSelClick() {
-        colorSel.classList.add('click-color');
-
-        if (!vm.disabled) {
-            ColorPickerService.publish('selected', vm.colorModel);
-            vm.onSelect({ color: vm.colorModel });
-            ColorPickerService.publish('hide', vm.colorModel);
-            ripple.classList.add('color-shadow-animate');
-        } else {
-            ColorPickerService.publish('show', vm.colorModel);
-            palette.classList.add('blur-palette-in');
-            palette.classList.remove('blur-palette-out');
-        }
-    }
-
-    function onRotatorDrag(angle) {
-        vm.angle = angle;
-
-        _updateColoredElements(angle);
-
-        $rootScope.$applyAsync(function() {
-            vm.onColorChange({ color: vm.colorModel });
-        });
-    }
-
     function $onInit() {
         wrapper = $element[0];
         knob = wrapper.querySelector('.knob');
@@ -112,6 +87,31 @@ function ColorPickerController($element, $rootScope, ColorPickerService) {
         palette  = null;
 
         ColorPickerService.unsubscribe();
+    }
+
+    function onColorSelClick() {
+        colorSel.classList.add('click-color');
+
+        if (!vm.disabled) {
+            ColorPickerService.publish('selected', vm.colorModel);
+            vm.onSelect({ color: vm.colorModel });
+            ColorPickerService.publish('hide', vm.colorModel);
+            ripple.classList.add('color-shadow-animate');
+        } else {
+            ColorPickerService.publish('show', vm.colorModel);
+            palette.classList.add('blur-palette-in');
+            palette.classList.remove('blur-palette-out');
+        }
+    }
+
+    function onRotatorDrag(angle) {
+        vm.angle = angle;
+
+        _updateColoredElements(angle);
+
+        $rootScope.$applyAsync(function() {
+            vm.onColorChange({ color: vm.colorModel });
+        });
     }
 
     function openColorPicker() {
