@@ -19,7 +19,6 @@ color-picker {
     @mixin disable-user-select() {
         -webkit-touch-callout: none;
           -webkit-user-select: none;
-           -khtml-user-select: none;
              -moz-user-select: none;
               -ms-user-select: none;
                   user-select: none;
@@ -38,6 +37,12 @@ color-picker {
 
         .knob {
             @include z-depth-all(6);
+        }
+    }
+
+    &.disabled {
+        .rotator {
+            pointer-events: none;
         }
     }
 
@@ -81,6 +86,7 @@ color-picker {
             background-color: #fff;
             border-radius: 50%;
         }
+
         &.blur-palette-in {
             transform: scale(1);
             opacity: 1;

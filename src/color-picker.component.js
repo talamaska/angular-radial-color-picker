@@ -1,7 +1,8 @@
 export default {
     bindings: {
         onSelect: '&',
-        color: '<?ngModel' // initial color to load
+        color: '<',
+        onColorChange: '&'
     },
     controller: ColorPickerController,
     template: '\
@@ -18,17 +19,20 @@ ColorPickerController.$inject = ['$element', '$rootScope', 'ColorPickerService']
 function ColorPickerController($element, $rootScope, ColorPickerService) {
     var vm = this;
 
+    this.disabled = false;
+    this.colorModel = { hue: 0, saturation: 100, luminosity: 50, alpha: 1 };
+
     this.$onInit = $onInit;
     this.$onDestroy = $onDestroy;
     this.$onChanges = $onChanges;
     this.onColorSelClick = onColorSelClick;
     this.onRotatorDrag = onRotatorDrag;
 
-    var knob, rotator, colorSel, ripple, palette;
+    var wrapper, knob, rotator, colorSel, ripple, palette;
 
     ColorPickerService.subscribe('open', function() {
-        if (!_isPaletteVisible()) {
-            ColorPickerService.publish('show', vm.selectedColor);
+        if (vm.disabled) {
+            ColorPickerService.publish('show', vm.colorModel);
 
             // showing palette will also show the knob
             palette.classList.add('blur-palette-in');
@@ -37,8 +41,8 @@ function ColorPickerController($element, $rootScope, ColorPickerService) {
     });
 
     ColorPickerService.subscribe('close', function() {
-        if (_isPaletteVisible()) {
-            ColorPickerService.publish('hide', vm.selectedColor);
+        if (!vm.disabled) {
+            ColorPickerService.publish('hide', vm.colorModel);
 
             // hiding knob will also hide the palette
             knob.classList.add('zoom-knob-out');
@@ -49,68 +53,56 @@ function ColorPickerController($element, $rootScope, ColorPickerService) {
     function onColorSelClick() {
         colorSel.classList.add('click-color');
 
-        if (_isPaletteVisible()) {
-            vm.onSelect({ color: vm.selectedColor });
-            ColorPickerService.publish('selected', vm.selectedColor);
-            ColorPickerService.publish('hide', vm.selectedColor);
+        if (!vm.disabled) {
+            ColorPickerService.publish('selected', vm.colorModel);
+            vm.onSelect({ color: vm.colorModel });
+            ColorPickerService.publish('hide', vm.colorModel);
             ripple.classList.add('color-shadow-animate');
         } else {
-            ColorPickerService.publish('show', vm.selectedColor);
+            ColorPickerService.publish('show', vm.colorModel);
             palette.classList.add('blur-palette-in');
             palette.classList.remove('blur-palette-out');
         }
     }
 
     function onRotatorDrag(angle) {
-        var saturation = 100;
-        var luminosity = 50;
-        var alpha = 1;
-        var color = 'hsla(' + angle + ', ' + saturation + '%, ' + luminosity + '%, ' + alpha + ')';
-        var rgbModel = ColorPickerService.hslToRgb(angle, saturation, luminosity);
-        var hexModel = ColorPickerService.hslToHex(angle, saturation, luminosity);
-
-        colorSel.style.backgroundColor = color;
-        ripple.style.borderColor = color;
-
         vm.angle = angle;
-        vm.selectedColor = {
-            hex: hexModel,
-            hsla: {
-                hue: angle,
-                saturation: saturation,
-                luminosity: luminosity,
-                alpha: alpha
-            },
-            rgba: {
-                red: rgbModel.red,
-                green: rgbModel.green,
-                blue: rgbModel.blue,
-                alpha: alpha
-            }
-        };
+
+        _updateColoredElements(angle);
+
+        $rootScope.$applyAsync(function() {
+            vm.onColorChange({ color: vm.colorModel });
+        });
     }
 
     function $onInit() {
-        rotator = $element[0].querySelector('.rotator');
-        knob = $element[0].querySelector('.knob');
-        colorSel = $element[0].querySelector('.color');
-        ripple = $element[0].querySelector('.color-shadow');
-        palette = $element[0].querySelector('.color-palette');
+        wrapper = $element[0];
+        rotator = wrapper.querySelector('.rotator');
+        knob = wrapper.querySelector('.knob');
+        colorSel = wrapper.querySelector('.color');
+        ripple = wrapper.querySelector('.color-shadow');
+        palette = wrapper.querySelector('.color-palette');
 
         colorSel.addEventListener('animationend', _onColorSelAnimationEnd);
         knob.addEventListener('transitionend', _onKnobTransitionEnd);
         ripple.addEventListener('animationend', _onRippleAnimationEnd);
         palette.addEventListener('transitionend', _onPaletteTransitionEnd);
 
-        // @fix angular < 1.5.4 doesn't trigger $onChanges properly on init
-        $onChanges.call(this);
+        if (vm.color && vm.color.hue) {
+            vm.angle = vm.color.hue;
+            _updateColoredElements(vm.color.hue);
+        } else {
+            vm.angle = 0;
+        }
     }
 
     function $onChanges() {
-        if (this.color && 'red' in this.color && 'green' in this.color && 'blue' in this.color) {
-            this.angle = ColorPickerService.rgbToHsl(this.color.red, this.color.green, this.color.blue).hue;
-        } else {
-            this.angle = 0;
+        if (changeObj.color) {
+            // on angular > 1.5.3 $onChanges is triggered once before $onInit and then again after $onInit
+            if (colorSel && ripple) {
+                vm.angle = vm.color.hue;
+                _updateColoredElements(vm.color.hue);
+            }
         }
     }
 
@@ -123,13 +115,29 @@ function ColorPickerController($element, $rootScope, ColorPickerService) {
         // clear circular child DOM node references to allow GC to collect them
         knob     = null; rotator = null;
         colorSel = null; ripple = null;
-        palette  = null;
+        palette  = null; wrapper = null;
 
         ColorPickerService.unsubscribe();
     }
 
+    function _updateColoredElements(angle) {
+        var color = '';
+
+        if (vm.color) {
+            vm.color.hue = angle;
+            color = 'hsla(' + vm.color.hue + ', ' + vm.color.saturation + '%, ' + vm.color.luminosity + '%, ' + vm.color.alpha + ')';
+            vm.colorModel = vm.color;
+        } else {
+            color = 'hsla(' + angle + ', 100%, 50%, 1)';
+            vm.colorModel = { hue: angle, saturation: 100, luminosity: 50, alpha: 1 };
+        }
+
+        colorSel.style.backgroundColor = color;
+        ripple.style.borderColor = color;
+    }
+
     function _onColorSelAnimationEnd() {
-        if (!_isKnobVisible()) {
+        if (vm.disabled) {
             knob.classList.add('zoom-knob-in');
             knob.classList.remove('zoom-knob-out');
         } else {
@@ -143,11 +151,13 @@ function ColorPickerController($element, $rootScope, ColorPickerService) {
     function _onKnobTransitionEnd(ev) {
         // 'transitionend' fires for every transitioned property
         if (ev.propertyName === 'transform') {
-            if (!_isKnobVisible()) {
+            if (!vm.disabled) {
                 palette.classList.add('blur-palette-out');
                 palette.classList.remove('blur-palette-in');
             } else {
-                ColorPickerService.publish('shown', vm.selectedColor);
+                vm.disabled = false;
+                wrapper.classList.remove('disabled');
+                ColorPickerService.publish('shown', vm.colorModel);
             }
         }
     }
@@ -159,23 +169,14 @@ function ColorPickerController($element, $rootScope, ColorPickerService) {
     function _onPaletteTransitionEnd(ev) {
         // 'transitionend' fires for every transitioned property
         if (ev.propertyName === 'transform') {
-            if (_isPaletteVisible()) {
+            if (vm.disabled) {
                 knob.classList.add('zoom-knob-in');
                 knob.classList.remove('zoom-knob-out');
             } else {
-                ColorPickerService.publish('hidden', vm.selectedColor);
+                vm.disabled = true;
+                wrapper.classList.add('disabled');
+                ColorPickerService.publish('hidden', vm.colorModel);
             }
         }
-    }
-
-    function _isPaletteVisible() {
-        var isIn = palette.classList.contains('blur-palette-in');
-        var isOut = palette.classList.contains('blur-palette-out');
-
-        return isIn || (!isIn && !isOut);
-    }
-
-    function _isKnobVisible() {
-        return !knob.classList.contains('zoom-knob-out');
     }
 }
