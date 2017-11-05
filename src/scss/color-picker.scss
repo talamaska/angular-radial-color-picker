@@ -101,7 +101,7 @@ color-picker {
     .rotator {
         width: 100%;
         height: 100%;
-        position: relative;
+        position: absolute;
 
         &.dragging {
             z-index: 1;
