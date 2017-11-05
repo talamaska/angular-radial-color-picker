@@ -91,10 +91,13 @@ function ColorPickerController($element, $rootScope, ColorPickerService) {
         ripple = wrapper.querySelector('.color-shadow');
         palette = wrapper.querySelector('.color-palette');
 
+        wrapper.addEventListener('keyup', _togglePalleteOnEnter);
         colorSel.addEventListener('animationend', _onColorSelAnimationEnd);
         knob.addEventListener('transitionend', _onKnobTransitionEnd);
         ripple.addEventListener('animationend', _onRippleAnimationEnd);
         palette.addEventListener('transitionend', _onPaletteTransitionEnd);
+
+        wrapper.setAttribute('tabindex', 0);
 
         if (vm.color && vm.color.hue) {
             vm.angle = vm.color.hue;
@@ -115,6 +118,7 @@ function ColorPickerController($element, $rootScope, ColorPickerService) {
     }
 
     function $onDestroy() {
+        wrapper.removeEventListener('keypress', _togglePalleteOnEnter);
         colorSel.removeEventListener('animationend', _onColorSelAnimationEnd);
         knob.removeEventListener('transitionend', _onKnobTransitionEnd);
         ripple.removeEventListener('animationend', _onRippleAnimationEnd);
@@ -126,6 +130,12 @@ function ColorPickerController($element, $rootScope, ColorPickerService) {
         palette  = null; wrapper = null;
 
         ColorPickerService.unsubscribe();
+    }
+
+    function _togglePalleteOnEnter(ev) {
+        if (ColorPickerService.isKey.enter(ev.key)) {
+            onColorSelClick();
+        }
     }
 
     function _updateColoredElements(angle) {

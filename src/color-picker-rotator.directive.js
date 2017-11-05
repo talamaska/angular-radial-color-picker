@@ -1,6 +1,7 @@
 import Propeller from './propeller.js';
 
-export default function colorPickerRotator() {
+colorPickerRotator.$inject = ['ColorPickerService'];
+export default function colorPickerRotator(ColorPickerService) {
     var directive = {
         link: ColorPickerRotatorLink,
         restrict: 'A',
@@ -37,6 +38,8 @@ export default function colorPickerRotator() {
             }
         });
 
+        colorPicker.addEventListener('keydown', onKeydown);
+
         if ($scope.mouseScroll) {
             colorPicker.addEventListener('wheel', onScroll);
         }
@@ -56,6 +59,38 @@ export default function colorPickerRotator() {
 
             colorPicker = null;
         });
+
+        function onKeydown(ev) {
+            if ($scope.disabled)
+                return;
+
+            var multiplier = 0;
+            var isIncrementing = ColorPickerService.isKey.up(ev.key) || ColorPickerService.isKey.right(ev.key);
+            var isDecrementing = ColorPickerService.isKey.down(ev.key) || ColorPickerService.isKey.left(ev.key);
+
+            if (isIncrementing) {
+                multiplier = 1;
+
+                if (ev.ctrlKey) {
+                    multiplier = 6;
+                } else if (ev.shiftKey) {
+                    multiplier = 3;
+                }
+            } else if (isDecrementing) {
+                multiplier = -1;
+
+                if (ev.ctrlKey) {
+                    multiplier = -6;
+                } else if (ev.shiftKey) {
+                    multiplier = -3;
+                }
+            }
+
+            if (isIncrementing || isDecrementing) {
+                ev.preventDefault();
+                propelInstance.angle += scrollSensitivity * multiplier;
+            }
+        }
 
         function onScroll(ev) {
             if ($scope.disabled)

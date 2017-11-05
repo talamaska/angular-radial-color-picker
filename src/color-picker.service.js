@@ -4,6 +4,14 @@ export default function ColorPickerService($rootScope) {
     this.subscribe = subscribe;
     this.unsubscribe = unsubscribe;
 
+    this.isKey = {
+        up: function(key) { return key === 'Up' || key === 'ArrowUp' },
+        down: function(key) { return key === 'Down' || key === 'ArrowDown' },
+        left: function(key) { return key === 'Left' || key === 'ArrowLeft' },
+        right: function(key) { return key === 'Right' || key === 'ArrowRight' },
+        enter: function(key) { return key === 'Enter' }
+    };
+
     this.rgbToHex = rgbToHex;
     this.rgbToHsl = rgbToHsl;
     this.hslToRgb = hslToRgb;
