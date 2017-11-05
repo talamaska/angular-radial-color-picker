@@ -22,7 +22,7 @@ export default function colorPickerRotator(ColorPickerService) {
         var initialAngle = $scope.angle || 0;
 
         var propelInstance = new Propeller($element[0], {
-            angle: initialAngle
+            angle: initialAngle,
             inertia: .7,
             speed: 0,
             onRotate: function(ev) {

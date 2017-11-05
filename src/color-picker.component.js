@@ -2,7 +2,7 @@ export default {
     bindings: {
         onSelect: '&',
         color: '<',
-        onColorChange: '&'
+        onColorChange: '&',
         mouseScroll: '<',
         scrollSensitivity: '<'
     },
@@ -36,7 +36,7 @@ function ColorPickerController($element, $rootScope, ColorPickerService) {
     this.onColorSelClick = onColorSelClick;
     this.onRotatorDrag = onRotatorDrag;
 
-    var wrapper, knob, rotator, colorSel, ripple, palette;
+    var wrapper, knob, colorSel, ripple, palette;
 
     ColorPickerService.subscribe('open', function() {
         if (vm.disabled) {
@@ -85,7 +85,6 @@ function ColorPickerController($element, $rootScope, ColorPickerService) {
 
     function $onInit() {
         wrapper = $element[0];
-        rotator = wrapper.querySelector('.rotator');
         knob = wrapper.querySelector('.knob');
         colorSel = wrapper.querySelector('.color');
         ripple = wrapper.querySelector('.color-shadow');
@@ -107,7 +106,7 @@ function ColorPickerController($element, $rootScope, ColorPickerService) {
         }
     }
 
-    function $onChanges() {
+    function $onChanges(changeObj) {
         if (changeObj.color) {
             // on angular > 1.5.3 $onChanges is triggered once before $onInit and then again after $onInit
             if (colorSel && ripple) {
@@ -125,9 +124,9 @@ function ColorPickerController($element, $rootScope, ColorPickerService) {
         palette.removeEventListener('transitionend', _onPaletteTransitionEnd);
 
         // clear circular child DOM node references to allow GC to collect them
-        knob     = null; rotator = null;
+        knob     = null; wrapper = null;
         colorSel = null; ripple = null;
-        palette  = null; wrapper = null;
+        palette  = null;
 
         ColorPickerService.unsubscribe();
     }
