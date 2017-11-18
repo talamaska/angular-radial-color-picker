@@ -8,7 +8,7 @@ export default {
     },
     controller: ColorPickerController,
     template: '\
-        <div class="color-palette"></div> \
+        <div color-picker-conic-gradient class="color-palette"></div> \
         <div class="rotator" \
              color-picker-rotator \
              disabled="$ctrl.disabled" \

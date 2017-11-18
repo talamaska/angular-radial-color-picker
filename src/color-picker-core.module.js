@@ -1,6 +1,8 @@
 import ColorPickerService from './color-picker.service.js';
 import colorPickerRotator from './color-picker-rotator.directive.js';
+import colorPickerConicGradient from './color-picker-conic-gradient.directive.js';
 import colorPickerComponent from './color-picker.component.js';
+
 export default angular
     /**
      * @ngdoc module
@@ -49,6 +51,19 @@ export default angular
      * @example <div color-picker-rotator on-rotate="$ctrl.onRotate(angle)" angle="0" disabled="false" mouse-scroll="false" scroll-sensitivity="2"></div>
      */
     .directive('colorPickerRotator', colorPickerRotator)
+
+    /**
+     * @ngdoc directive
+     * @name colorPickerConicGradient
+     * @module color.picker.core
+     * @restrict A
+     *
+     * @description
+     * Generates a bitmap conic gradient to polyfill the CSS L4 conic-gradient().
+     *
+     * @example <div color-picker-conic-gradient></div>
+     */
+    .directive('colorPickerConicGradient', colorPickerConicGradient)
 
     /**
      * @ngdoc component

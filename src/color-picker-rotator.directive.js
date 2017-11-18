@@ -25,7 +25,7 @@ export default function colorPickerRotator(ColorPickerService) {
             angle: initialAngle,
             inertia: .7,
             speed: 0,
-            onRotate: function(ev) {
+            onRotate: function() {
                 $scope.onRotate({ angle: this.angle });
             },
             onDragStart: function() {
