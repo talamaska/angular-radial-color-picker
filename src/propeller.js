@@ -79,7 +79,7 @@ Propeller.prototype.addListeners = function () {
     this.element.addEventListener('mousedown', this.onRotationStart, { passive: true });
     this.element.addEventListener('mousemove', this.onRotated);
     this.element.addEventListener('mouseup', this.onRotationStop, { passive: true });
-    this.element.addEventListener('mouseleave', this.onRotationStop, { passive: true });
+    this.element.addEventListener('mouseleave', this.onRotationStop);
 }
 
 Propeller.prototype.removeListeners = function () {

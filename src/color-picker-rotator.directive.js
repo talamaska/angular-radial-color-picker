@@ -8,7 +8,7 @@ export default function colorPickerRotator(ColorPickerService) {
         scope: {
             onRotate: '&',
             angle: '<',
-            disabled: '<',
+            isDisabled: '<',
             mouseScroll: '<',
             scrollSensitivity: '<'
         }
@@ -29,12 +29,12 @@ export default function colorPickerRotator(ColorPickerService) {
                 $scope.onRotate({ angle: this.angle });
             },
             onDragStart: function() {
-                if (!$scope.disabled) {
+                if (!$scope.isDisabled) {
                     $element.addClass('dragging');
                 }
             },
             onDragStop: function() {
-                if (!$scope.disabled) {
+                if (!$scope.isDisabled) {
                     $element.removeClass('dragging');
                 }
             }
@@ -66,7 +66,7 @@ export default function colorPickerRotator(ColorPickerService) {
         });
 
         function onKeydown(ev) {
-            if ($scope.disabled)
+            if ($scope.isDisabled)
                 return;
 
             var multiplier = 0;
@@ -98,7 +98,7 @@ export default function colorPickerRotator(ColorPickerService) {
         }
 
         function onDblClick(ev) {
-            if ($scope.disabled || !ev.target.classList.contains('rotator'))
+            if ($scope.isDisabled || !ev.target.classList.contains('rotator'))
                 return;
 
             var newAngle = propelInstance.getAngleToMouse({
@@ -110,7 +110,7 @@ export default function colorPickerRotator(ColorPickerService) {
         }
 
         function onScroll(ev) {
-            if ($scope.disabled)
+            if ($scope.isDisabled)
                 return;
 
             ev.preventDefault();

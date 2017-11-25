@@ -11,7 +11,7 @@ export default {
         <div color-picker-conic-gradient class="color-palette"></div> \
         <div class="rotator" \
              color-picker-rotator \
-             disabled="$ctrl.disabled" \
+             is-disabled="$ctrl.disabled" \
              mouse-scroll="$ctrl.mouseScroll" \
              scroll-sensitivity="$ctrl.scrollSensitivity" \
              on-rotate="$ctrl.onRotatorDrag(angle)" \
