@@ -1,3 +1,8 @@
+/**
+ * Modified version of Denis Radin's Propeller.
+ *
+ * @link https://github.com/PixelsCommander/Propeller
+ */
 export default function Propeller(element, options) {
     this.last = 0;
     this.active = false;

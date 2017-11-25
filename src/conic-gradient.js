@@ -1,3 +1,8 @@
+/**
+ * Modified version of Lea Verou's conic-gradient.
+ *
+ * @link https://github.com/leaverou/conic-gradient
+ */
 export default function ConicGradient(size) {
     this.canvas = document.createElement('canvas');
     this.context = this.canvas.getContext('2d');
