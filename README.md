@@ -1,133 +1,124 @@
-# Angular Radial Color Picker
+## Angular Radial Color Picker
 
-## Material design(ish) color picker with some animations sprinkled on top.
+<p align="center"><img width="250" src="./screenshots/thumbnail.png" alt="screenshot"></p>
 
-The color picker has been developed treating the mobile devices as first class citizens:
+<p align="center"><a href="https://www.npmjs.com/package/angular-radial-color-picker"> <img src="https://img.shields.io/npm/dt/angular-radial-color-picker.svg" alt="Downloads"> </a> <a href="https://www.npmjs.com/package/angular-radial-color-picker"> <img src="https://img.shields.io/npm/v/angular-radial-color-picker.svg" alt="Version"> </a> <a href="https://www.npmjs.com/package/angular-radial-color-picker"> <img src="https://img.shields.io/npm/l/angular-radial-color-picker.svg" alt="License"> </a></p>
+
+### Introduction
+
+Great UX starts with two basic principles - ease of use and simplicity. Selecting a color should be as easy as moving a slider, clicking a checkbox or pressing a key just like other basic form elements behave.
+
+This is a flexible and elegant material design color picker. Developed with mobile devices and keyboard usage in mind. Key features:
+* Small size - 5.4 KB gzipped (JS and CSS combined)
 * Supports touch devices
 * Responsive size
-* Blazing fast GPU accelerated animations
+* Optimized animations
+* Supports CommonJS and ES Modules
+* Ease of use
+    * Double click anywhere to move the knob to a color
+    * <kbd>Tab</kbd> to focus the picker
+    * <kbd>Up</kbd> or <kbd>Right</kbd> arrow key to increase hue. Hold <kbd>Ctrl</kbd> to go quicker
+    * <kbd>Bottom</kbd> or <kbd>Left</kbd> arrow key decrease hue. Hold <kbd>Ctrl</kbd> to go quicker
+    * <kbd>Enter</kbd> to select a color and close the picker or to open it
+    * Mouse <kbd>ScrollUp</kbd> to increase and <kbd>ScrollDown</kbd> to decrease hue (Opt-in)
 
-The only dependency of Angular Radial Color Picker is [Propeller](https://github.com/PixelsCommander/Propeller) for rotating the knob.
-
-## Quick Links:
+### Quick Links
 
 * [Demos](#user-content-demos)
-* [Install](#user-content-install)
-* [API](#user-content-api)
+* [Usage](#user-content-usage)
+* [Options](#user-content-options)
 * [Events](#user-content-events)
 * [Styling/sizing](#user-content-stylingsizing)
+* [FAQ](#user-content-questions)
 * [Contribute](#user-content-contributing)
 
-## <a name="demos">Demos</a>
-Color Picker in a modal window - [GitHub Pages](https://talamaska.github.io/angular-radial-color-picker)
+### <a name="demos">Demos</a>
+* Color Picker in a modal window - [GitHub Pages](https://talamaska.github.io/angular-radial-color-picker)
+* Barebones example - [Codepen](http://codepen.io/rkunev/pen/evYaBO)
 
-Barebones example - [Codepen](http://codepen.io/rkunev/pen/evYaBO)
+### <a name="usage">Usage</a>
 
-## <a name="install">Install</a>
-
-### NPM
+#### With Module Build System
 Color Picker on [npm](https://www.npmjs.com/package/angular-radial-color-picker)
 ```bash
-npm install angular-radial-color-picker
+npm install -S angular-radial-color-picker
 ```
 
-And in your html:
+And in your app:
+
+```javascript
+import angular from 'angular';
+import colorPicker from 'angular-radial-color-picker';
+import 'angular-radial-color-picker/dist/css/color-picker.scss';
+
+angular.module('app', [colorPicker]);
+```
+
+Depending on your build tool of choice you have to setup the appropriate Webpack loaders or Rollup plugins. The color picker was tested with the latest versions of [sass-loader](https://github.com/webpack-contrib/sass-loader) and [rollup-plugin-postcss](https://github.com/egoist/rollup-plugin-postcss).
+
+#### UMD version
+
+You can also use the minified sources directly:
 
 ```html
 <head>
-    <!-- Include the css -->
-    <link href="path/to/angular-radial-color-picker/dist/css/color-picker.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/angular-radial-color-picker@latest/dist/css/color-picker.min.css" rel="stylesheet">
 </head>
-<body>
-    <!-- The actual color picker component -->
-    <color-picker ng-model="$ctrl.initialColor" on-select="$ctrl.onSelect(color)"></color-picker>
+<body ng-app="app">
+    <color-picker></color-picker>
 
-    <!-- Angular Radial Color Picker Dependencies -->
-    <script src="path/to/propeller.min.js"></script>
-    <script src="path/to/angular/angular.min.js"></script>
-
-    <!-- Include the package -->
-    <script src="path/to/angular-radial-color-picker/dist/js/color-picker.min.js"></script>
+    <script src="https://unpkg.com/angular@1.6.6/angular.min.js"></script>
+    <script src="https://unpkg.com/angular-radial-color-picker@latest/dist/color-picker.umd.min.js"></script>
+    <script>
+        angular.module('app', ['color.picker.core']);
+    </script>
 </body>
 ```
 
-Once you have all the necessary assets installed, add `color.picker.core` as a dependency for your app:
-```javascript
-angular.module('myApp', ['color.picker.core']);
-```
+[Back To Top](#user-content-quick-links)
+
+### <a name="options">Options</a>
+`<color-picker>` component has several attributes, all of which are optional. [See the example](http://codepen.io/rkunev/pen/evYaBO) which uses all options.
+
+| Options       | Type   | Default/Description |
+|------------|--------|---------|
+| `color`    | Object | Object for initializing/changing the color of the picker. Defaults to red: <br> `{hue: 0, saturation: 100, luminosity: 50, alpha: 1}`. |
+| `on-select` | Function | Callback which is triggered when a color is selected. |
+| `on-color-change` | Function | A function to invoke when color is changed (i.e. on rotation). |
+| `mouse-scroll` | Boolean | Use wheel (scroll) event to rotate. Defaults to false. |
+| `scroll-sensitivity` | Number | Amount of degrees to rotate the picker with keyboard and/or wheel. <br> Defaults to 2 degrees. |
 
 [Back To Top](#user-content-quick-links)
 
-## <a name="api">API</a>
-`<color-picker></color-picker>` component has 2 attributes:
+### <a name="events">Events</a>
 
-- `ng-model` Object for initializing/changing the color of the picker (optional). Properties:
+For maximum flexibility the component utilizes the pub/sub pattern. For easier communication a set of events are provided that can even programmatically open or close the picker without interacting with the UI. All events carry the current (selected) color in the event data payload.
 
-| Name  | Type   | Default | Description |
-|-------|--------|---------|------------------------------|
-| red   | number | 255     | An integer between 0 and 255 |
-| green | number | 0       | An integer between 0 and 255 |
-| blue  | number | 0       | An integer between 0 and 255 |
-
-- `on-select` callback which gets triggered when a color is selected (optional, see [Events](#user-content-events)). The passed function is invoked with one argument which is an object with the following properties:
-
-| Name  | Type   | Description                  |
-|-------|--------|------------------------------|
-| hex   | string | A hexidecimal string         |
-| rgba  | object | RGBA color model             |
-| hsla  | object | HSLA color model             |
-
-- RGBA Color model:
-
-| Name  | Type   | Default | Description |
-|-------|--------|---------|-------------|
-| red   | number | 255     | An integer between 0 and 255 |
-| green | number | 0       | An integer between 0 and 255 |
-| blue  | number | 0       | An integer between 0 and 255 |
-| alpha | number | 1       | Transparency. A number between 0 and 1 |
-
-- HSLA Color model:
-
-| Name       | Type   | Default | Description |
-|------------|--------|---------|-------------|
-| hue        | number | 0       | A number between 0 and 359 |
-| saturation | number | 100     | A number between 0 and 100 |
-| luminosity | number | 50      | A number between 0 and 100 |
-| alpha      | number | 1       | A number between 0 and 1 |
-
-[Back To Top](#user-content-quick-links)
-
-## <a name="events">Events</a>
-
-For maximum flexibility the component utilizes the pub/sub pattern. For easier communication a set of events are provided that can even programatically open or close the picker without interacting with the UI. All events are published/subscribed at the `$rootScope` so that sibling components can subscribe to them too. All events carry the current (selected) color in the event data payload.
-
-* `color-picker.show` - Fires when the color picker is about to show and **before** any animation is started.
-* `color-picker.shown` - Fires when the color picker is shown and has finished animating.
-* `color-picker.selected` - Fires when a color is selected via the middle selector. Event is fired right before `hide`.
-* `color-picker.hide` - Fires when the color picker is about to hide and **before** any animation is started.
-* `color-picker.hidden` - Fires when the color picker is hidden and has finished animating.
+| Name       | Description |
+|------------|-------------|
+| `color-picker.show` | Fires when the color picker is about to show and **before** any animation is started. |
+| `color-picker.shown` | Fires when the color picker is shown and has finished animating. |
+| `color-picker.selected` | Fires when a color is selected via the middle selector. Event is fired right before `hide`. |
+| `color-picker.hide` | Fires when the color picker is about to hide and **before** any animation is started. |
+| `color-picker.hidden` | Fires when the color picker is hidden and has finished animating. |
+| `color-picker.open` | Programatically opens the color picker if it's not already opened. |
+| `color-picker.close` | Programatically closes the color picker if it's not already closed. |
 
 Example:
 ```javascript
-// Listening for something interesting to happen:
-$rootScope.$on('color-picker.selected', function(ev, color) {
-    // a) using HSLA color model
-    vm.selectedColor = 'hsla(' + color.hsla.hue + ', ' + color.hsla.saturation + '%, ' + color.hsla.luminosity + '%, ' + color.hsla.alpha + ')';
-
-    // b) using RGB color model
-    vm.selectedColor = 'rgb(' + color.rgb.red + ', ' + color.rgb.green + ', ' + color.rgb.blue + ')';
-
-    // c) plain old hex
-    vm.selectedColor = '#' + color.hex;
+// Assign the selected color to the ViewModel and log it to the console
+$scope.$on('color-picker.selected', function(ev, color) {
+    vm.selectedColor = 'hsla(' + color.hue + ', ' + color.saturation + '%, ' + color.luminosity + '%, ' + color.alpha + ')';
+    console.log('Selected color:', color);
 });
 
 // The good'n'tested "poke-it-with-a-stick" method:
-$rootScope.$broadcast('color-picker.open');
+$scope.$emit('color-picker.open');
 ```
 
 [Back To Top](#user-content-quick-links)
 
-## <a name="styling">Styling/sizing</a>
+### <a name="styling">Styling/Sizing</a>
 
 The color picker has a default width/height of 280px, but can also be sized via CSS. For example:
 ```css
@@ -137,9 +128,63 @@ color-picker {
 }
 ```
 
+If you want a percentage based size you can use this neat little [trick](https://css-tricks.com/aspect-ratio-boxes/) with 1:1 aspect ratio box of 40% width of the parent element:
+```css
+color-picker {
+    height: 0;
+    width: 40%;
+    padding-bottom: 40%;
+}
+```
+
 [Back To Top](#user-content-quick-links)
 
-## Contributing
+### <a name="questions">First Asked Questions</a>
+
+<details>
+    <summary>Color picker uses <code>hsla()</code>. How can I use other formats like <code>rgba()</code> or HEX?</summary>
+    <p>There's a service you can use - <code>ColorPickerService</code>. It has <code>rgbToHsl()</code> which can be used to map a color to the <code>hsla()</code> type that the color picker expects. There's also <code>hslToHex()</code>, <code>hslToRgb()</code> and <code>rgbToHex()</code> which can be used to convert the output of the color picker to other formats.</p>
+</details>
+
+<details>
+    <summary>How to select other shades of the solid colors?</summary>
+    <p>We suggest to add a custom slider for saturation and luminosity or use <code>&lt;input type="range"&gt;</code>.</p>
+</details>
+
+<details>
+    <summary>How can I change the active color of the picker after initialization?</summary>
+    <p><code>color-picker</code> component uses <code>$onChanges</code> to detect changes of the color binding. When using <code>&lt;color-picker color="$ctrl.color"&gt;&lt;/color-picker&gt;</code> if you change a property of <code>$ctrl.color</code> object <code>$onChanges</code> is not triggered, because <a href="https://github.com/angular/angular.js/issues/14378#issuecomment-328805679">angular uses a shallow comparison</a>. To properly update the color you'll have to create a new object with the new values. For example:
+    <pre>$ctrl.color.hue = 42; // won't work</pre>
+    <pre>// use the angular helper
+$ctrl.color = angular.extend({}, $ctrl.color, { hue: 42 });</pre>
+    <pre>// or create the object manually
+$ctrl.color = {
+    hue: 42,
+    luminosity: $ctrl.color.luminosity,
+    saturation: $ctrl.color.saturation,
+    alpha: $ctrl.color.alpha
+};</pre>
+    <pre>// or use Stage-3 Object Spread properties
+$ctrl.color = { ...$ctrl.color, hue: 42 };</pre>
+    <pre>// or use Object.assign
+$ctrl.color = Object.assign({}, $ctrl.color, { hue: 42 });</pre>
+    </p>
+</details>
+
+<details>
+    <summary>Why does Google Chrome throw a <code>[Violation] Added non-passive event listener to a scroll-blocking 'touchmove' event.</code> warning in the console?</summary>
+    <p><code>touchmove</code> is used with <code>preventDefault()</code> to block scrolling on mobile while rotating the color knob. Even the <a href="https://github.com/WICG/EventListenerOptions/blob/gh-pages/explainer.md#removing-the-need-to-cancel-events">Web Incubator Community Group</a> acknowledges that in some cases a passive event listener can't be used.</p>
+</details>
+
+<details>
+    <summary>Why is the scroll-to-rotate not turned on by default?</summary>
+    <p>It's another non-passive event that could potentially introduce jank on scroll. To rotate the color knob, but stay on the same scrolling position the <code>wheel</code> event is blocked with <code>preventDefault()</code>. Thus, if you really want this feature for your users you'll have to explicitly add the <code>mouse-scroll="true"</code> attribute.</p>
+</details>
+<br>
+
+[Back To Top](#user-content-quick-links)
+
+### Contributing
 TBD
 
 [Back To Top](#user-content-quick-links)
