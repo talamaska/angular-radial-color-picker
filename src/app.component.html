@@ -1,4 +1,4 @@
-<md-toolbar class="main-header md-primary md-whiteframe-1dp" style="background-color: {{ $ctrl.selectedColor }}">
+<md-toolbar class="main-header md-primary md-whiteframe-1dp" style="background-color: hsla({{ $ctrl.color.hue }}, {{ $ctrl.color.saturation }}%, {{ $ctrl.color.luminosity }}%, {{ $ctrl.color.alpha }});">
     <div class="md-toolbar-tools">
         <h2>Angular Radial Color Picker Demo</h2>
         <span flex></span>
@@ -121,3 +121,26 @@ color-picker .knob {
         </div>
     </div>
 </div>
+
+<script type="text/ng-template" id="color-picker-dialog">
+    <md-dialog class="color-picker-dialog">
+         <md-toolbar class="md-accent md-hue-2">
+              <div class="md-toolbar-tools">
+                   <h2>Pick a Color</h2>
+                   <span flex></span>
+                   <md-button class="md-icon-button" ng-click="vm.closeDialog()">
+                        <md-icon>close</md-icon>
+                   </md-button>
+              </div>
+         </md-toolbar>
+         <md-dialog-content class="md-padding">
+              <div class="dialog-content-wrapper">
+                   <color-picker color="vm.initialColor"></color-picker>
+                   <div class="hint">
+                        <p><strong>Hint:</strong> drag the wheel to change the color.</p>
+                        <p>Save your selection by clicking the color circle in the middle</p>
+                   </div>
+              </div>
+         </md-dialog-content>
+    </md-dialog>
+</script>

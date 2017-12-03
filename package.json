@@ -10,5 +10,6 @@
   "contributors": [
     "Rosen Kanev <rkunev@gmail.com>"
   ],
-  "homepage": "https://github.com/talamaska/angular-radial-color-picker#readme"
+  "homepage": "https://github.com/talamaska/angular-radial-color-picker#readme",
+  "dependencies": {}
 }
