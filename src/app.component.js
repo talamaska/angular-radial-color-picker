@@ -9,7 +9,7 @@
         });
 
     /* @ngInject */
-    function AppController($rootScope, $scope, $mdDialog) {
+    function AppController($scope, $mdDialog) {
         var vm = this;
 
         vm.color = { hue: 333, saturation: 100, luminosity: 50, alpha: 1 };
@@ -44,11 +44,11 @@
             });
         }
 
-        $rootScope.$on('color-picker.hide', function(ev, color) {
+        $scope.$on('color-picker.hide', function(ev, color) {
             vm.color = color;
         });
 
-        $rootScope.$on('color-picker.hidden', function(ev, color) {
+        $scope.$on('color-picker.hidden', function(ev, color) {
             $mdDialog.hide();
         });
     }
