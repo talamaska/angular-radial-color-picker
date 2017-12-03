@@ -4,7 +4,7 @@
 
 <p align="center"><a href="https://www.npmjs.com/package/angular-radial-color-picker"> <img src="https://img.shields.io/npm/dt/angular-radial-color-picker.svg" alt="Downloads"> </a> <a href="https://www.npmjs.com/package/angular-radial-color-picker"> <img src="https://img.shields.io/npm/v/angular-radial-color-picker.svg" alt="Version"> </a> <a href="https://www.npmjs.com/package/angular-radial-color-picker"> <img src="https://img.shields.io/npm/l/angular-radial-color-picker.svg" alt="License"> </a></p>
 
-### Introduction
+## Introduction
 
 Great UX starts with two basic principles - ease of use and simplicity. Selecting a color should be as easy as moving a slider, clicking a checkbox or pressing a key just like other basic form elements behave.
 
@@ -22,7 +22,7 @@ This is a flexible and elegant material design color picker. Developed with mobi
     * <kbd>Enter</kbd> to select a color and close the picker or to open it
     * Mouse <kbd>ScrollUp</kbd> to increase and <kbd>ScrollDown</kbd> to decrease hue (Opt-in)
 
-### Quick Links
+## Quick Links
 
 * [Demos](#user-content-demos)
 * [Usage](#user-content-usage)
@@ -32,11 +32,11 @@ This is a flexible and elegant material design color picker. Developed with mobi
 * [FAQ](#user-content-questions)
 * [Contribute](#user-content-contributing)
 
-### <a name="demos">Demos</a>
+## <a name="demos">Demos</a>
 * Color Picker in a modal window - [GitHub Pages](https://talamaska.github.io/angular-radial-color-picker)
 * Barebones example - [Codepen](http://codepen.io/rkunev/pen/evYaBO)
 
-### <a name="usage">Usage</a>
+## <a name="usage">Usage</a>
 
 #### With Module Build System
 Color Picker on [npm](https://www.npmjs.com/package/angular-radial-color-picker)
@@ -77,7 +77,7 @@ You can also use the minified sources directly:
 
 [Back To Top](#user-content-quick-links)
 
-### <a name="options">Options</a>
+## <a name="options">Options</a>
 `<color-picker>` component has several attributes, all of which are optional. [See the example](http://codepen.io/rkunev/pen/evYaBO) which uses all options.
 
 | Options       | Type   | Default/Description |
@@ -90,7 +90,7 @@ You can also use the minified sources directly:
 
 [Back To Top](#user-content-quick-links)
 
-### <a name="events">Events</a>
+## <a name="events">Events</a>
 
 For maximum flexibility the component utilizes the pub/sub pattern. For easier communication a set of events are provided that can even programmatically open or close the picker without interacting with the UI. All events carry the current (selected) color in the event data payload.
 
@@ -118,7 +118,7 @@ $scope.$emit('color-picker.open');
 
 [Back To Top](#user-content-quick-links)
 
-### <a name="styling">Styling/Sizing</a>
+## <a name="styling">Styling/Sizing</a>
 
 The color picker has a default width/height of 280px, but can also be sized via CSS. For example:
 ```css
@@ -139,7 +139,7 @@ color-picker {
 
 [Back To Top](#user-content-quick-links)
 
-### <a name="questions">First Asked Questions</a>
+## <a name="questions">First Asked Questions</a>
 
 <details>
     <summary>Color picker uses <code>hsla()</code>. How can I use other formats like <code>rgba()</code> or HEX?</summary>
@@ -184,7 +184,11 @@ $ctrl.color = Object.assign({}, $ctrl.color, { hue: 42 });</pre>
 
 [Back To Top](#user-content-quick-links)
 
-### Contributing
-TBD
+## Contribute
+If you're interested in the project you can help out with feature requests, bugfixes, documentation improvements or any other helpful contributions. You can use the issue list of this repo for bug reports and feature requests and as well as for questions and support.
+
+We are also particularly interested in projects you did with this plugin. If you have created something colorful and creative with the color picker and want to show it off send us a quick mail.
+
+The project is using an adapted version of [Angular's commit convention](https://github.com/conventional-changelog/conventional-changelog/blob/master/packages/conventional-changelog-angular/convention.md) and commit messages should adhere to it.
 
 [Back To Top](#user-content-quick-links)
