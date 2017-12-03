@@ -22,22 +22,101 @@
         <div class="main-content-sheet md-whiteframe-3dp" flex-xs="100" flex-sm="100" flex-gt-sm="60">
             <div layout="row" layout-align="center">
                 <div class="text-container" flex-gt-md="60" flex-xs="100" flex-sm="100">
-                    <h2 class="md-headline">Overview</h2>
+                    <h2 class="md-headline">Introduction</h2>
                     <p>
-                        Angular Radial Color Picker has been developed treating the mobile devices as first class citizens. This means
-                        that out of the box you get:
+                        Great UX starts with two basic principles - ease of use and simplicity. Selecting a color should be as easy as moving a slider, clicking a checkbox or pressing a key just like other basic form elements behave.
                     </p>
+
+                    <p>
+                        This is a flexible and elegant material design color picker. Developed with mobile devices and keyboard usage in mind. Key features:
+                    </p>
+
                     <ul>
-                        <li>Touch devices support</li>
+                        <li>Small size - 5.4 KB gzipped (JS and CSS combined)</li>
+                        <li>Supports touch devices</li>
                         <li>Responsive size</li>
-                        <li>Blazing fast GPU accelerated animations</li>
-                        <li>Super small size (~6 kB minified + gzipped)</li>
+                        <li>Optimized animations</li>
+                        <li>Supports CommonJS and ES Modules</li>
+                        <li>
+                            Ease of use
+                            <ul>
+                                <li>Double click anywhere to move the knob to a color</li>
+                                <li><kbd>Tab</kbd> to focus the picker</li>
+                                <li><kbd>Up</kbd> or <kbd>Right</kbd> arrow key to increase hue. Hold <kbd>Ctrl</kbd> to go quicker</li>
+                                <li><kbd>Bottom</kbd> or <kbd>Left</kbd> arrow key decrease hue. Hold <kbd>Ctrl</kbd> to go quicker</li>
+                                <li><kbd>Enter</kbd> to select a color and close the picker or to open it</li>
+                                <li>Mouse <kbd>ScrollUp</kbd> to increase and <kbd>ScrollDown</kbd> to decrease hue (Opt-in)</li>
+                            </ul>
+                        </li>
                     </ul>
-                    <p>
-                        The size is the overall module size <strong>including</strong> the Propeller dependency. For maximum browser support
-                        the color wheel is actualy a PNG file (59 kB), but we're looking into a pre-generated SVG asset or
-                        a CSS solution such as <code>linear-gradient()</code>.
-                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div layout="row" layout-align="center center">
+        <div class="main-content-sheet md-whiteframe-3dp" flex-xs="100" flex-sm="100" flex-gt-sm="60">
+            <div layout="row" layout-align="center">
+                <div class="text-container" flex-gt-md="60" flex-xs="100" flex-sm="100">
+                    <h2 class="md-headline">Usage</h2>
+                    <h4 class="md-subhead">With Module Build System</h4>
+                    <p><b>Step 1</b>: Install package from npm.</p>
+                </div>
+            </div>
+
+            <div layout="row" layout-align="center" class="gist-wrapper">
+                <div class="gist" flex-gt-md="60" flex-xs="100" flex-sm="100">
+<pre class="line-numbers"><code class="language-bash">npm install angular-radial-color-picker
+
+# or using yarn
+yarn add angular-radial-color-picker
+</code></pre>
+                </div>
+            </div>
+
+            <div layout="row" layout-align="center">
+                <div class="text-container" flex-gt-md="60" flex-xs="100" flex-sm="100">
+                    <p><b>Step 2</b>: Import & add the module as angular dependency.</p>
+                </div>
+            </div>
+
+            <div layout="row" layout-align="center" class="gist-wrapper">
+                <div class="gist" flex-gt-md="60" flex-xs="100" flex-sm="100">
+<pre class="line-numbers"><code class="language-javascript">import angular from 'angular';
+import colorPicker from 'angular-radial-color-picker';
+import 'angular-radial-color-picker/dist/css/color-picker.scss';
+
+angular.module('app', [colorPicker]);</code></pre>
+                </div>
+            </div>
+
+            <div layout="row" layout-align="center">
+                <div class="text-container" flex-gt-md="60" flex-xs="100" flex-sm="100">
+                    <p><b>Note</b>: Depending on your build tool of choice you have to setup the appropriate Webpack loaders or Rollup plugins. The color picker was tested with the latest versions of <a href="https://github.com/webpack-contrib/sass-loader">sass-loader</a> and <a href="https://github.com/egoist/rollup-plugin-postcss">rollup-plugin-postcss</a>.</p>
+                </div>
+            </div>
+
+            <div layout="row" layout-align="center">
+                <div class="text-container" flex-gt-md="60" flex-xs="100" flex-sm="100">
+                    <h4 class="md-subhead">UMD version</h4>
+                    <p>You can also use the minified sources directly</p>
+                </div>
+            </div>
+
+            <div layout="row" layout-align="center" class="gist-wrapper">
+                <div class="gist" flex-gt-md="60" flex-xs="100" flex-sm="100">
+<pre class="line-numbers"><code class="language-html">&lt;head&gt;
+    &lt;link href="https://unpkg.com/angular-radial-color-picker@latest/dist/css/color-picker.min.css" rel="stylesheet"&gt;
+&lt;/head&gt;
+&lt;body ng-app="app"&gt;
+    &lt;color-picker&gt;&lt;/color-picker&gt;
+
+    &lt;script src="https://unpkg.com/angular@1.6.6/angular.min.js"&gt;&lt;/script&gt;
+    &lt;script src="https://unpkg.com/angular-radial-color-picker@latest/dist/color-picker.umd.min.js"&gt;&lt;/script&gt;
+    &lt;script&gt;
+        angular.module('app', ['color.picker.core']);
+    &lt;/script&gt;
+&lt;/body&gt;</code></pre>
                 </div>
             </div>
         </div>
@@ -58,6 +137,7 @@
                     </p>
                 </div>
             </div>
+
             <div layout="row" layout-align="center" class="gist-wrapper">
                 <div class="gist" flex-gt-md="60" flex-xs="100" flex-sm="100">
 <pre class="line-numbers"><code class="language-css">color-picker {
@@ -69,6 +149,24 @@
         width: 350px;
         height: 350px;
     }
+}</code></pre>
+                </div>
+            </div>
+
+            <div layout="row" layout-align="center">
+                <div class="text-container" flex-gt-md="60" flex-xs="100" flex-sm="100">
+                    <p>
+                        If you want a percentage based size you can use this neat little <a href="https://css-tricks.com/aspect-ratio-boxes/">trick</a> with 1:1 aspect ratio box of 40% width of the parent element.
+                    </p>
+                </div>
+            </div>
+
+            <div layout="row" layout-align="center" class="gist-wrapper">
+                <div class="gist" flex-gt-md="60" flex-xs="100" flex-sm="100">
+<pre class="line-numbers"><code class="language-css">color-picker {
+    height: 0;
+    width: 40%;
+    padding-bottom: 40%;
 }</code></pre>
                 </div>
             </div>
