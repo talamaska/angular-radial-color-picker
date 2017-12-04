@@ -10,6 +10,4 @@
             $compileProvider.debugInfoEnabled(false);
             $mdInkRippleProvider.disableInkRipple();
         });
-
-    // angular.module('app').constant('$MD_THEME_CSS', '');
 })();
